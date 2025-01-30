@@ -349,7 +349,8 @@ namespace MobiFlight.UI.Panels
             {
 
                 // handle clicks on header cells or row-header cells
-                if (dgv.CurrentRow.Index < 0 || dgv.CurrentCell.ColumnIndex < 0) return;
+                // Issue 1863: Check for null (nothing in the grid) so there's no crash
+                if (dgv.CurrentRow == null || dgv.CurrentRow.Index < 0 || dgv.CurrentCell.ColumnIndex < 0) return;
 
                 dgv.CurrentCell = dgv[cellIndex, dgv.CurrentRow.Index];
 
@@ -648,16 +649,17 @@ namespace MobiFlight.UI.Panels
                     } else if(cfgItem.DisplayType=="InputAction")
                     {
                         row["OutputType"] = cfgItem.DisplayType;
-                        if (cfgItem.ButtonInputConfig!=null)
+                        if (cfgItem.ButtonInputConfig != null)
                         {
-                            if (cfgItem.ButtonInputConfig.onRelease!=null)
+                            if (cfgItem.ButtonInputConfig.onRelease != null)
                                 row["OutputName"] = cfgItem.ButtonInputConfig.onRelease.GetType().ToString().Replace("MobiFlight.InputConfig.", "");
                             if (cfgItem.ButtonInputConfig.onPress != null)
                                 row["OutputName"] = cfgItem.ButtonInputConfig.onPress.GetType().ToString().Replace("MobiFlight.InputConfig.", "");
                         }
                         if (cfgItem.AnalogInputConfig != null)
                         {
-                            row["OutputName"] = cfgItem.AnalogInputConfig.onChange.GetType().ToString().Replace("MobiFlight.InputConfig.", "");
+                            if (cfgItem.AnalogInputConfig.onChange != null)
+                                row["OutputName"] = cfgItem.AnalogInputConfig.onChange.GetType().ToString().Replace("MobiFlight.InputConfig.", "");
                         }
                     }
                 }
