@@ -336,6 +336,12 @@ namespace MobiFlight
             }
         }
 
+
+        public JoystickDefinition GetJoystickDefinition()
+        {
+            return Definition;
+        }
+
         private void UpdatePOV(JoystickState newState)
         {
             if (POV.Count == 0) return;
@@ -519,6 +525,13 @@ namespace MobiFlight
                 // this happens when the device is removed.
                 OnDeviceRemoved();
             }
+        }
+
+        public virtual void ShowUserMessage(int messageCode, params string[] parameters)
+        {
+            // nothing to do
+            // only relevant for game controllers which have a 
+            // means to show a message to an user.
         }
 
         public virtual void Stop()

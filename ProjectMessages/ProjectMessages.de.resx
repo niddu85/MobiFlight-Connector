@@ -199,8 +199,8 @@ Alle ungespeicherten Änderungen gehen dabei verloren.</value>
   <data name="Label_Precondition_ConfigItem" xml:space="preserve">
     <value>Config Eintrag</value>
   </data>
-  <data name="DefaultFileName" xml:space="preserve">
-    <value>neu</value>
+  <data name="DefaultProjectName" xml:space="preserve">
+    <value>Neues Projekt</value>
   </data>
   <data name="uiMessageConfirmDiscardUnsaved" xml:space="preserve">
     <value>Es sind noch Änderungen ungespeichert.
@@ -687,5 +687,15 @@ Schließe MSFS und führe die Installation erneut aus: "Extras" &gt; "Microsoft 
   </data>
   <data name="uiNone" xml:space="preserve">
     <value>Keine</value>
+  </data>
+  <data name="uiMessagePythonInstructions" xml:space="preserve">
+    <value>Bitte den Anweisungen hier folgen:
+	
+https://docs.mobiflight.com/guides/installing-python/
+
+Website wird nach Betätigung von OK geöffnet.</value>
+  </data>
+  <data name="uiMessagePythonHint" xml:space="preserve">
+    <value>Python Umgebung nicht bereit</value>
   </data>
 </root>

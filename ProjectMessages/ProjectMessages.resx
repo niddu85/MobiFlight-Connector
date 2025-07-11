@@ -198,8 +198,8 @@ All unsaved changes will get lost.</value>
   <data name="Label_Precondition_ConfigItem" xml:space="preserve">
     <value>Config item</value>
   </data>
-  <data name="DefaultFileName" xml:space="preserve">
-    <value>unsaved</value>
+  <data name="DefaultProjectName" xml:space="preserve">
+    <value>New Project</value>
   </data>
   <data name="uiMessageConfirmDiscardUnsaved" xml:space="preserve">
     <value>There are unsaved changes in your configuration.
@@ -281,7 +281,7 @@ You should configure them now.</value>
     <value>Precondition is not satisfied</value>
   </data>
   <data name="WebsiteUrlHelp" xml:space="preserve">
-    <value>https://www.mobiflight.com/en/documentation/software.html</value>
+    <value>https://docs.mobiflight.com/</value>
   </data>
   <data name="suffixCopy" xml:space="preserve">
     <value>Copy</value>
@@ -652,5 +652,15 @@ Close MSFS and install the WASM module via menu "Extras" &gt; "Microsoft Flight 
   <data name="uiNone" xml:space="preserve">
     <value>None</value>
     <comment>Used in the connected devices menu to indicate no connected devices found.</comment>
+  </data>
+  <data name="uiMessagePythonInstructions" xml:space="preserve">
+    <value>Please follow instructions on:
+	
+https://docs.mobiflight.com/guides/installing-python/
+	
+Page will be opened, when pressing OK.</value>
+  </data>
+  <data name="uiMessagePythonHint" xml:space="preserve">
+    <value>Python environment not ready</value>
   </data>
 </root>

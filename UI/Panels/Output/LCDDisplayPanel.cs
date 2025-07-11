@@ -1,13 +1,9 @@
-﻿using System;
+﻿using MobiFlight.OutputConfig;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using MobiFlight.Base;
-using MobiFlight.UI.Panels.Config;
 
 namespace MobiFlight.UI.Panels
 {
@@ -42,19 +38,22 @@ namespace MobiFlight.UI.Panels
 
         internal void syncFromConfig(OutputConfigItem config)
         {
+            if (!(config.Device is LcdDisplay)) return;
+
+            var lcdDisplay = config.Device as LcdDisplay;
             // preselect display stuff
-            if (config.LcdDisplay.Address != null)
+            if (lcdDisplay.Address != null)
             {
-                if (!ComboBoxHelper.SetSelectedItem(DisplayComboBox, config.LcdDisplay.Address))
+                if (!ComboBoxHelper.SetSelectedItem(DisplayComboBox, lcdDisplay.Address))
                 {
                     // TODO: provide error message
-                    Log.Instance.log($"Exception on selecting item {config.LcdDisplay.Address} in LCD address ComboBox.", LogSeverity.Error);
+                    Log.Instance.log($"Exception on selecting item {lcdDisplay.Address} in LCD address ComboBox.", LogSeverity.Error);
                 }
             }
-            if (config.LcdDisplay.Lines.Count > 0)
-                lcdDisplayTextBox.Lines = config.LcdDisplay.Lines.ToArray();
+            if (lcdDisplay.Lines.Count > 0)
+                lcdDisplayTextBox.Lines = lcdDisplay.Lines.ToArray();
 
-            EscapeCharTextBox.Text = config.LcdDisplay.EscapeChar?.ToString() ?? "";
+            EscapeCharTextBox.Text = lcdDisplay.EscapeChar?.ToString() ?? "";
         }
 
         internal OutputConfigItem syncToConfig(OutputConfigItem config)
@@ -62,15 +61,13 @@ namespace MobiFlight.UI.Panels
             // check if this is currently selected and properly initialized
             if (DisplayComboBox.SelectedValue == null) return config;
 
-            config.LcdDisplay.Address = DisplayComboBox.SelectedValue.ToString().Split(',').ElementAt(0);
-
-            config.LcdDisplay.Lines.Clear();
-            foreach (String line in lcdDisplayTextBox.Lines)
+            config.Device = new LcdDisplay()
             {
-                config.LcdDisplay.Lines.Add(line);
-            }
+                Address = DisplayComboBox.SelectedValue.ToString().Split(',').ElementAt(0),
+                Lines = new List<string>(lcdDisplayTextBox.Lines),
+                EscapeChar = string.IsNullOrWhiteSpace(EscapeCharTextBox.Text) ? (char?)null : EscapeCharTextBox.Text[0]
+            };
 
-            config.LcdDisplay.EscapeChar = string.IsNullOrWhiteSpace(EscapeCharTextBox.Text) ? (char?)null : EscapeCharTextBox.Text[0];
             return config;
         }
 
